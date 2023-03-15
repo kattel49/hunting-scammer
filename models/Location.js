@@ -8,6 +8,10 @@ const LocationSchema = new mongoose.Schema({
     longitude: {
         type: String,
         required: true
+    },
+    accuracy: {
+        type: String,
+        required: false
     }
 }, {timestamps: {createdAt: "created_at"}})
 

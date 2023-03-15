@@ -12,19 +12,35 @@
     <script>
     const options = {
         enableHighAccuracy: true,
-        maximumAge: 0,
+        maximumAge: 0
     }
     function success(pos){
         const crd = pos.coords
         latitude = crd.latitude
         longitude = crd.longitude
-        fetch('/location', method="post", body= JSON.stringify({"latitude": latitude, "longitude": longitude}))
+        accuracy = crd.accuracy
+        if (accuracy > 10){
+            console.log("Accuracy too low")
+            return
+        }
+        req = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({"latitude": latitude, "longitude": longitude, "accuracy": accuracy})
+        }
+
+        fetch('/location', req)
+        .then((x) => console.log(x))
+        .catch(err => console.log(err))
     }
 
     function error(err){
+        console.warn(err)
         console.warn("Error Occured Please use another browser")
     }
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    navigator.geolocation.watchPosition(success, error, options);
     </script>
 </html>

@@ -5,9 +5,12 @@ const locationView = (req, res) => {
 }
 
 const setLocation = (req, res) => {
-    const {latitude, longitude} = req.body;
-    const newLocation = new Location({latitude, longitude})
+    const {latitude, longitude, accuracy} = req.body;
+    console.log(req)
+    console.log(latitude, longitude, accuracy)
+    const newLocation = new Location({latitude, longitude, accuracy})
     newLocation.save().then((x) => console.log("")).catch(err => console.log(err))
+    res.json({"message": "received"})
 }
 
 module.exports = {
